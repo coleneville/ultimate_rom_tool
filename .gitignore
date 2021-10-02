@@ -3,6 +3,7 @@
 failed/
 sorted/
 to_sort/
+__pycache__/
 
 *.pyc
 *.egg-info

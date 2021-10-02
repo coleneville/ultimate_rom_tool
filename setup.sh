@@ -11,9 +11,12 @@ else
 fi
 
 pip install -r requirements.txt
-pip install -e .
+pip install -e ./src
 
 echo \
 'TO_SORT=../to_sort
 ROM_ROOT=../rom_root
-DAT_ROOT=../dat_root' > .env
+DAT_ROOT=../dat_root
+
+SS_USERNAME=
+SS_PASSWORD=' > .env

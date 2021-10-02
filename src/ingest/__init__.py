@@ -1,22 +1,14 @@
 import os
-import re
 from os import path
 import json
 import shutil as sh
 from zipfile import ZipFile
 import requests
-import zlib
 from typing import List
 
+from hashing import file_crc32
 
-def find_files(path: str) -> list:
-  files = []
-  
-  for root, _, file_names in os.walk(path):
-    for file_name in file_names:
-      files.append(f'{root}/{file_name}')
-
-  return files
+from .utils import *
 
 
 def move_to_tmp(file_path: str) -> List[str]:
@@ -40,22 +32,6 @@ def move_to_tmp(file_path: str) -> List[str]:
     sh.copy(file_path, 'tmp')
 
     return [ file_name ]
-
-
-def crc(filepath) -> str:
-  import hashlib
-
-  BUF_SIZE = 65536
-
-  with open(filepath, 'rb') as infile:
-    hash = 0
-    data = infile.read(BUF_SIZE)
-
-    while data:
-      hash = zlib.crc32(data, hash)
-      data = infile.read(BUF_SIZE)
-
-    return "%08X" % (hash & 0xFFFFFFFF)
 
 
 def get_file_info(file_name: str, crc: str):
@@ -125,7 +101,7 @@ def ingest_file(file_path: str) -> None:
 
   for file_name in file_names:
     tmp_file_path = f'tmp/{file_name}'
-    file_crc = crc(tmp_file_path)
+    file_crc = file_crc32(tmp_file_path)
 
     try:
       file_info = get_file_info(tmp_file_path, file_crc)
