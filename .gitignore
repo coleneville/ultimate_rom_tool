@@ -1,0 +1,7 @@
+.venv/
+.env
+failed/
+sorted/
+to_sort/
+
+*.pyc
