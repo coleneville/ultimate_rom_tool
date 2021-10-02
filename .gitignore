@@ -5,3 +5,4 @@ sorted/
 to_sort/
 
 *.pyc
+*.egg-info
