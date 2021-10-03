@@ -14,9 +14,9 @@ pip install -r requirements.txt
 pip install -e ./src
 
 echo \
-'TO_SORT=../to_sort
-ROM_ROOT=../rom_root
-DAT_ROOT=../dat_root
+'BACKLOG=../backlog
+DEPOT=../depot
+FAILED=../failed
 
 SS_USERNAME=
 SS_PASSWORD=' > .env

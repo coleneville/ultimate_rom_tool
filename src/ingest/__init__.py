@@ -9,7 +9,7 @@ from typing import List
 from hashing import file_crc32
 
 from .utils import *
-
+from .ingester import Ingester
 
 def move_to_tmp(file_path: str) -> List[str]:
   file_ext = file_path.split('.')[-1]
@@ -104,7 +104,7 @@ def ingest_file(file_path: str) -> None:
     file_crc = file_crc32(tmp_file_path)
 
     try:
-      file_info = get_file_info(tmp_file_path, file_crc)
+      file_info = get_file_info(file_name, file_crc)
       dest_path = get_dest(file_info)
       sort_path = create_dir(dest_path)
       sort_file(tmp_file_path, sort_path, file_crc, file_info)
